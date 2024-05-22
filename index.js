@@ -8,32 +8,125 @@ const mediaArray = [
 
 // Class representing a movie
 class Movie {
+    #title;
+    #year;
+    #genre;
+    #rating;
+    #type;
+
     constructor(title, year, genre, rating, type) {
-        this.title = title;
-        this.year = year;
-        this.genre = genre;
-        this.rating = rating;
-        this.type = type;
+        this.#title = title;
+        this.#year = year;
+        this.#genre = genre;
+        this.#rating = rating;
+        this.#type = type;
+    }
+
+    get title() {
+        return this.#title;
+    }
+
+    get year() {
+        return this.#year;
+    }
+
+    get genre() {
+        return this.#genre;
+    }
+
+    get rating() {
+        return this.#rating;
+    }
+
+    get type() {
+        return this.#type;
+    }
+
+    set title(value) {
+        this.#title = value;
+    }
+
+    set year(value) {
+        this.#year = value;
+    }
+
+    set genre(value) {
+        this.#genre = value;
+    }
+
+    set rating(value) {
+        this.#rating = value;
+    }
+
+    set type(value) {
+        this.#type = value;
     }
 
     // Method to return a string representation of the movie
     toString() {
-        return `${this.title} è un film di genere ${this.genre}. È stato rilasciato nel ${this.year} ed ha un voto di ${this.rating}.`;
+        return `${this.#title} è un film di genere ${this.#genre}. È stato rilasciato nel ${this.#year} ed ha un voto di ${this.#rating}.`;
     }
 }
 
 // Class representing a TV show, extending the Movie class
 class Show extends Movie {
+    #seasons;
+
     constructor(title, year, genre, rating, type, seasons) {
-        super(title, year, genre, rating, type); // Call the parent class constructor
-        this.seasons = seasons; // Add a new property specific to TV shows
+        super(title, year, genre, rating, type);
+        this.#seasons = seasons;
+    }
+
+    get seasons() {
+        return this.#seasons;
+    }
+
+    set seasons(value) {
+        this.#seasons = value;
     }
 
     // Method to return a string representation of the TV show
     toString() {
-        return `${this.title} è una serie tv di genere ${this.genre}. La prima stagione è stata rilasciata nel ${this.year} ed in totale sono state prodotte ${this.seasons} stagioni. Ha un voto di ${this.rating}.`;
+        return `${this.title} è una serie tv di genere ${this.genre}. La prima stagione è stata rilasciata nel ${this.year} ed in totale sono state prodotte ${this.#seasons} stagioni. Ha un voto di ${this.rating}.`;
     }
 }
+
+// Class representing a cart
+class Cart {
+
+    constructor() {
+        this.items = [];
+        this.price = 3.99;
+    }
+
+    // Method to add movie in the cart
+    addItem(movie) {
+        this.items.push(movie);
+        console.log(`${movie.title} è stato aggiunto nel carrello!`);
+    }
+
+    // Method to remove movie in the cart
+    removeItem(movie) {
+        const index = this.items.indexOf(movie);
+        if (index > -1) {
+            this.items.splice(index, 1);
+            console.log(`${movie.title} è stato rimosso dal carrello!`);
+        }
+    }
+
+    // Method to get total price of the cart
+    getTotalPrice() {
+        return this.items.length * this.price;
+    }
+
+    // Method to return cart items name
+    toString() {
+        return this.items.map(item => item.title);
+    }
+
+}
+
+
 
 // Create instances of Movie or Show based on the type property
 const mediaInstances = mediaArray.map(media => {
@@ -68,14 +161,27 @@ function getAllGenres(mediaList) {
 
 // Get all unique genres for movies
 const genres = getAllGenres(mediaInstances);
-console.log('Generi disponibili:', genres);
+console.log('Sono disponibili film con i seguenti generi:', genres);
 
 // Function to filter movies by genre and return their string representations
 function filterByGenre(mediaList, genre) {
-    const filteredMovie = mediaList.filter(media => media.genre === genre && media.type === 'movie').map(media => media.toString()); // Filter movies by genre and map to string representations
+    const filteredMovie = mediaList.filter(media => media.genre === genre && media.type === 'movie').map(media => media.title); // Filter movies by genre and map to string representations
     return filteredMovie; // Return the array of string representations
 }
 
 // Get and log the list of Sci-Fi movies
 const filterMovie = filterByGenre(mediaInstances, 'Sci-Fi');
 console.log(`Ecco una lista dei film con il genere selezionato: ${filterMovie}`);
+
+// Create instances of Cart
+const cart = new Cart();
+
+cart.addItem(mediaInstances[0]); // Adding Inception
+cart.addItem(mediaInstances[2]); // Adding The Matrix
+
+console.log('Carrello:', cart.toString());
+console.log('Prezzo totale del carrello:', cart.getTotalPrice());
+
+cart.removeItem(mediaInstances[2]); // Removing The Matrix
+
+console.log('Carrello:', cart.toString());
