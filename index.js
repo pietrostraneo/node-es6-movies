@@ -163,33 +163,33 @@ console.log(`Media dei voti per i film di genere Sci-Fi: ${sciFiRating}`);
 
 // Function to get all unique genres from the movie list
 function getAllGenres(mediaList) {
-    const genres = new Set(mediaList.filter(media => media.type === 'movie').map(media => media.genre)); // Filter movies and extract unique genres
+    const genres = new Set(mediaList.map(media => media.genre)); // Filter movies and extract unique genres
     return Array.from(genres); // Convert the Set to an Array
 }
 
 // Get all unique genres for movies
 const genres = getAllGenres(mediaInstances);
-console.log('Sono disponibili film con i seguenti generi:', genres);
+console.log('Sono disponibili i seguenti generi:', genres);
 
 // Function to filter movies by genre and return their string representations
 function filterByGenre(mediaList, genre) {
-    const filteredMovie = mediaList.filter(media => media.genre === genre && media.type === 'movie').map(media => media.title); // Filter movies by genre and map to string representations
+    const filteredMovie = mediaList.filter(media => media.genre === genre).map(media => `${media.title}(${media.type})`); // Filter movies by genre and map to string representations
     return filteredMovie; // Return the array of string representations
 }
 
 // Get and log the list of Sci-Fi movies
 const filterMovie = filterByGenre(mediaInstances, 'Sci-Fi');
-console.log(`Ecco una lista dei film con il genere Sci-Fi: ${filterMovie}`);
+console.log(`Ecco una lista dei film e delle serie tv con il genere Sci-Fi: ${filterMovie}`);
 
 // Create instances of Cart
 const cart = new Cart();
 
 cart.addItem(mediaInstances[0]); // Adding Inception
-cart.addItem(mediaInstances[2]); // Adding The Matrix
+cart.addItem(mediaInstances[4]); // Adding The Matrix
 
 console.log('Carrello:', cart.toString());
 console.log('Prezzo totale del carrello:', cart.getTotalPrice());
 
-cart.removeItem(mediaInstances[2]); // Removing The Matrix
+cart.removeItem(mediaInstances[4]); // Removing The Matrix
 
 console.log('Carrello:', cart.toString());
