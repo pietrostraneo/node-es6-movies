@@ -41,3 +41,28 @@ const mediaInstances = mediaArray.map(media => {
 mediaInstances.forEach(mediaInstance => {
     console.log(mediaInstance.toString());
 });
+
+function averageRatingByGenre(mediaList, genre) {
+    const filteredMedia = mediaList.filter(media => media.genre === genre && media.type === 'movie');
+    const totalRating = filteredMedia.reduce((sum, media) => sum + media.rating, 0);
+    return filteredMedia.length ? (totalRating / filteredMedia.length) : 0;
+}
+
+const sciFiRating = averageRatingByGenre(mediaInstances, 'Sci-Fi');
+console.log(`Media dei voti per i film di genere Sci-Fi: ${sciFiRating}`);
+
+function getAllGenres(mediaList) {
+    const genres = new Set(mediaList.filter(media => media.type === 'movie').map(media => media.genre));
+    return Array.from(genres);
+}
+
+const genres = getAllGenres(mediaInstances);
+console.log('Generi disponibili:', genres);
+
+function filterByGenre(mediaList, genre) {
+    const filteredMovie = mediaList.filter(media => media.genre === genre && media.type === 'movie').map(media => media.toString());
+    return filteredMovie;
+}
+
+const filterMovie = filterByGenre(mediaInstances, 'Sci-Fi');
+console.log(`Ecco una lista dei film con il genere selezionato: ${filterMovie}`)
