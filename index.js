@@ -3,7 +3,15 @@ const mediaArray = [
     { title: 'Inception', year: 2010, genre: 'Sci-Fi', rating: 8.8, type: 'movie' },
     { title: 'Breaking Bad', year: 2008, genre: 'Drama', rating: 9.5, type: 'tv', seasons: 5 },
     { title: 'The Matrix', year: 1999, genre: 'Sci-Fi', rating: 8.7, type: 'movie' },
-    { title: 'Friends', year: 1994, genre: 'Comedy', rating: 8.9, type: 'tv', seasons: 10 }
+    { title: 'Friends', year: 1994, genre: 'Comedy', rating: 8.9, type: 'tv', seasons: 10 },
+    { title: 'The Godfather', year: 1972, genre: 'Crime', rating: 9.2, type: 'movie' },
+    { title: 'The Dark Knight', year: 2008, genre: 'Action', rating: 9.0, type: 'movie' },
+    { title: 'Pulp Fiction', year: 1994, genre: 'Crime', rating: 8.9, type: 'movie' },
+    { title: 'Stranger Things', year: 2016, genre: 'Sci-Fi', rating: 8.7, type: 'tv', seasons: 4 },
+    { title: 'Game of Thrones', year: 2011, genre: 'Fantasy', rating: 9.3, type: 'tv', seasons: 8 },
+    { title: 'The Office', year: 2005, genre: 'Comedy', rating: 8.9, type: 'tv', seasons: 9 },
+    { title: 'The Shawshank Redemption', year: 1994, genre: 'Drama', rating: 9.3, type: 'movie' },
+    { title: 'The Big Bang Theory', year: 2007, genre: 'Comedy', rating: 8.1, type: 'tv', seasons: 12 }
 ];
 
 // Class representing a movie
@@ -171,7 +179,7 @@ function filterByGenre(mediaList, genre) {
 
 // Get and log the list of Sci-Fi movies
 const filterMovie = filterByGenre(mediaInstances, 'Sci-Fi');
-console.log(`Ecco una lista dei film con il genere selezionato: ${filterMovie}`);
+console.log(`Ecco una lista dei film con il genere Sci-Fi: ${filterMovie}`);
 
 // Create instances of Cart
 const cart = new Cart();
